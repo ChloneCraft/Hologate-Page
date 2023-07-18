@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ragnaröck</title>
+    <style>
+      body {
+        background-color: #120f24;
+        background-image: url("../images/backgrounds/rock.png");
+        background-repeat: no-repeat;
+        background-position: 80%, 0%;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+      }
+      #gradient {
+        background: linear-gradient(
+          to bottom,
+          rgba(18, 15, 36, 0.315),
+          #120f24
+        );
+        width: 100%;
+        height: 1069px;
+      }
+      #video-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 4%;
+        margin-right: 5%;
+        margin-top: 2%;
+        width: 80%;
+        max-width: 80%;
+      }
+      #video-info {
+        margin-top: 20px;
+        margin-right: 10%;
+        margin-left: 10%;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+      }
+      h1 {
+        font-size: 48px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 20px;
+        font-style: italic;
+        font-size: 50px;
+      }
+      #video-title {
+        font-size: 26px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #f7f7f7;
+        margin-bottom: 10px;
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      #video-text {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #f7f7f7;
+        line-height: 1.5;
+        text-align: left;
+        word-spacing: 4px;
+        letter-spacing: 1px;
+        padding-right: 5%;
+      }
+      #video-info-divider {
+        border-top: 3px solid #f7f7f7;
+        width: 90%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+        align-self: center;
+      }
+      #right-text {
+        font-size: 18px;
+        padding: 3%;
+        text-align: left;
+        margin-left: 2%;
+        border-radius: 10px;
+        font-family: "Montserrat", sans-serif;
+      }
+      .cat {
+        font-weight: bold;
+        color: #f7f7f7;
+        font-size: 26px;
+        margin-bottom: 10px;
+      }
+      .ans {
+        font-weight: 100;
+        font-size: 20px;
+        color: #f7f7f7;
+        margin-bottom: 20px;
+        line-height: 1.5;
+        font-style: italic;
+      }
+      #icon {
+        width: 250px;
+        margin-bottom: 20px;
+        background-color: #cfced774;
+        border-radius: 10px;
+        opacity: 1;
+      }
+      #right-side {
+        display: flex;
+        flex-direction: column;
+        margin-right: 7vw;
+        width: 20%;
+        max-width: 20%;
+      }
+      #language {
+        width: 75px;
+        height: 75px;
+        z-index: 3;
+      }
+      #languageLink {
+        width: 100%;
+        height: 100%;
+        display: block;
+        z-index: 4;
+      }
+      #languageLink:active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      #langContainer {
+        position: fixed;
+        margin: 10px;
+        top: 0;
+        right: 0;
+        z-index: 2;
+      }
+      #headContainer {
+        position: relative;
+        padding-top: 8%;
+        padding-bottom: 0%;
+        margin-top: 4%;
+        width: 100%;
+        z-index: 100;
+      }
+      #backToHome {
+        position: fixed;
+        margin: 10px;
+        margin-bottom: 15px;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+      #HomeLink {
+        z-index: 3;
+      }
+      #backArrow {
+        width: 15vh;
+        height: 100%;
+        display: block;
+        z-index: 4;
+      }
+      #backArrow:active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      #overallContainer {
+        display: flex;
+        flex-direction: row;
+      }
+      #overallContainer2 {
+        display: flex;
+        flex-direction: column;
+      }
+      #pole {
+        border-left: 4px solid #f7f7f7;
+        opacity: 0.7;
+        height: 90%;
+        align-self: center;
+      }
+      #right-text-wrapper {
+        display: flex;
+        flex-direction: row;
+      }
+      #video {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      .video-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        max-width: 640px;
+        height: 100%;
+        max-height: 360px;
+        color: white;
+        z-index: 10;
+        margin-inline: auto;
+      }
+      video.wrapper.fullscreen {
+        max-height: 100vh;
+        max-width: initial;
+        width: 100%;
+      }
+      .video-controls-container {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+      }
+      /*.video-wrapper:hover .video-controls-container {
+        opacity: 1;
+      }*/
+      .video-wrapper.paused .video-controls-container {
+        opacity: 1;
+      }
+      .video-controls-container::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+        width: 100%;
+        aspect-ratio: 6 / 1;
+        z-index: -1;
+        pointer-events: none;
+      }
+      .video-controls-container .controls {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.25rem;
+        align-items: center;
+      }
+      .video-controls-container .controls button {
+        background: none;
+        border: none;
+        padding: 0;
+        height: 70px;
+        width: 70px;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+      .playPauseButton {
+        background: none;
+        opacity: 0;
+        border: none;
+        padding: 0;
+        height: 70px;
+        width: 70px;
+        font-size: 1.1rem;
+        position: absolute;
+        align-self: center;
+        justify-content: center;
+        transition: opacity 150ms ease-in-out;
+      }
+      /*.video-wrapper:hover .playPauseButton,*/
+      .video-wrapper.wake .playPauseButton,
+      .video-wrapper.paused .playPauseButton {
+        opacity: 1;
+      }
+      .video-wrapper.wake .video-controls-container {
+        opacity: 1;
+      }
+      .video-wrapper.paused .pause-icon {
+        display: none;
+      }
+      .video-wrapper:not(.paused) .play-icon {
+        display: none;
+      }
+      .video-wrapper.muted .sound-icon {
+        display: none;
+      }
+      .video-wrapper:not(.muted) .mute-icon {
+        display: none;
+      }
+      .play-icon {
+        position: absolute;
+        align-self: center;
+        justify-content: center;
+        height: 70px;
+        width: 70px;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+      .pause-icon {
+        position: absolute;
+        align-self: center;
+        justify-content: center;
+        height: 70px;
+        width: 70px;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+      .fullscreenButton {
+        height: 70px;
+        width: 70px;
+      }
+      .fullscreen-icon {
+        width: 100%;
+        height: 100%;
+      }
+      .muteButton {
+        left: 0;
+        height: 70px;
+        width: 70px;
+      }
+      .sound-icon {
+        width: 100%;
+        height: 100%;
+      }
+      .mute-icon {
+        width: 100%;
+        height: 100%;
+      }
+      .duration-container {
+        display: flex;
+        align-items: center;
+        font-size: 23px;
+        gap: 0.5rem;
+        flex-grow: 1;
+      }
+      .timeline-container {
+        height: 50px;
+        margin-inline: 0.5rem;
+        display: flex;
+        align-items: flex-end;
+        cursor: pointer;
+      }
+      /*.timeline-container:hover .timeline{
+        height: 16px;
+      }
+      .timeline-container:hover .timeline::before {
+        display: block;
+      }*/
+      .timeline {
+        background-color: rgba(100, 100, 100, 0.5);
+        height: 8px;
+        width: 100%;
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: calc(100% - var(--preview-progress) * 100%);
+        background-color: rgb(150, 150, 150);
+        display: none;
+      }
+      .timeline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: calc(100% - var(--progress-position) * 100%);
+        background-color: rgb(37, 150, 190);
+      }
+      .timeline .thumb-indicator {
+        --scale: 0;
+        position: absolute;
+        transform: translateX(-50%) scale(var(--scale));
+        height: 200%;
+        top: -50%;
+        left: calc(var(--progress-position) * 100%);
+        background-color: rgb(37, 150, 190);
+        border-radius: 50%;
+        transition: transform 150ms ease-in-out;
+        aspect-ratio: 1 / 1;
+      }
+
+      /*.timeline-container:hover .thumb-indicator {
+        --scale: 1;
+      }*/
+
+      .video-wrapper.scrubbing .timeline/*,
+      .timeline-container:hover .timeline*/ {
+        display: block;
+      }
+      .video-wrapper.scrubbing .timeline::before/*,
+      .timeline-container:hover .timeline::before*/ {
+        display: block;
+      }
+      .video-wrapper.scrubbing .thumb-indicator/*,
+      .timeline-container:hover .thumb-indicator*/ {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gradient">
+      <div id="headContainer">
+        <div id="backToHome">
+          <a href="../HologatePageGER.html" id="HomeLink"
+            ><img id="backArrow" src="../images/Icons/backArrow.png" alt="Home"
+          /></a>
+        </div>
+        <div id="langContainer">
+          <a href="ragnarok.html" id="languageLink"
+            ><img id="language" src="../images/uk.png" alt="english"
+          /></a>
+        </div>
+      </div>
+      <div id="overallContainer">
+        <div id="video-container">
+          <!--Video-->
+          <div class="video-wrapper paused" data-volume-level="sound">
+            <button class="playPauseButton">
+              <img
+                class="play-icon"
+                src="../images/Icons/play.png"
+                alt="Play"
+              /><img
+                class="pause-icon"
+                src="../images/Icons/pause.png"
+                alt="Pause"
+              />
+            </button>
+            <div class="video-controls-container">
+              <div class="timeline-container">
+                <div class="timeline">
+                  <div class="thumb-indicator"></div>
+                </div>
+              </div>
+              <div class="controls">
+                <button class="muteButton">
+                  <img
+                    class="sound-icon"
+                    src="../images/Icons/sound.png"
+                    alt="SoundON"
+                  /><img
+                    class="mute-icon"
+                    src="../images/Icons/mute.png"
+                    alt="SoundOFF"
+                  />
+                </button>
+                <div class="duration-container">
+                  <div class="current-time">0:00</div>
+                  /
+                  <div class="total-time"></div>
+                </div>
+                <button class="fullscreenButton">
+                  <img
+                    class="fullscreen-icon"
+                    src="../images/Icons/fullscreen.png"
+                    alt="fullscreen"
+                  />
+                </button>
+              </div>
+            </div>
+            <video id="video" src="../Videos/HG_RAGNAROCK_Trailer.mp4"></video>
+          </div>
+          <!--Video-->
+          <div id="video-info">
+            <h2 id="video-title">
+              Betrete die mystische Welt der Wikinger in diesem actiongeladenen
+              Wettbewerbs-Mehrspieler-Spiel. "Ragnaröck" ist einfach zu spielen
+              und schwer zu meistern. Als Kapitän eines Wikingerschiffs brauchst
+              du nur Rhythmus, um in Bewegung zu kommen und dein Team zum Sieg
+              zu führen. Zeige dein Können, schlage den Highscore und besiege
+              Familie und Freunde in diesem stilisierten Rennen.
+            </h2>
+            <div id="video-info-divider"></div>
+            <p id="video-text">
+              Deine Mannschaft braucht einen starken Kapitän, der hart rocken
+              und Risiken eingehen kann. Hebe deine Hämmer, schlage auf deine
+              Trommeln zum Klang epischer Wikinger-Musik und stich gegen deine
+              Rivalen in See! Es liegt an dir, die Wikinger-Power in deinen
+              Adern zu entfesseln und deinen Namen auf die Bestenliste zu
+              schreiben.
+            </p>
+          </div>
+        </div>
+        <div id="right-side">
+          <div id="icon-wrapper">
+            <!--<img id="icon" src="../images/Icons/RagnarockIcon.png" alt="Ragnaröck">-->
+          </div>
+          <div id="right-text-wrapper">
+            <div id="pole"></div>
+            <div id="right-text">
+              <p class="cat">Spieleranzahl</p>
+              <p class="ans">1-4 Spieler</p>
+              <p class="cat">Sprachen</p>
+              <p class="ans">Englisch, Französisch, Deutsch</p>
+              <p class="cat">Spielmodus</p>
+              <p class="ans">Spieler gegen Spieler</p>
+              <p class="cat">Spielzeit</p>
+              <p class="ans">5 Minuten</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    //copy
+
+    //copy
+    const playPauseBtn = document.querySelector(".playPauseButton");
+    const videoWrapper = document.querySelector(".video-wrapper");
+    const video = document.querySelector("video");
+    const fullscreenButton = document.querySelector(".fullscreenButton");
+    const currentTime = document.querySelector(".current-time");
+    const totalTime = document.querySelector(".total-time");
+    const timelineContainer = document.querySelector(".timeline-container");
+    const muteButton = document.querySelector(".muteButton");
+    var muted = false;
+    var TimeoutID;
+    let wake = true;
+
+    video.addEventListener("click", test);
+
+    function togglePlay() {
+      video.paused ? video.play() : video.pause();
+    }
+    function test() {
+      if (video.paused) {
+        video.play();
+        wake = false;
+      } else if (wake) {
+        video.pause();
+      } else {
+        clearTimeout(TimeoutID);
+        wake = true;
+        videoWrapper.classList.add("wake");
+        TimeoutID = setTimeout(function () {
+          wake = false;
+          videoWrapper.classList.remove("wake");
+        }, 3000);
+      }
+    }
+
+    //Volume
+
+    muteButton.addEventListener("click", toggleMute);
+
+    function toggleMute() {
+      video.muted = !video.muted;
+      if (video.muted) {
+        videoWrapper.classList.add("muted");
+      } else {
+        videoWrapper.classList.remove("muted");
+      }
+    }
+
+    video.volume = 0.1;
+
+    //Timeline for Touch
+    timelineContainer.addEventListener("touchmove", handleTimelineUpdate);
+    timelineContainer.addEventListener("touchstart", toggleScrubbing);
+    document.addEventListener("touchend", (e) => {
+      if (isScrubbing) toggleScrubbing(e);
+    });
+    document.addEventListener("touchmove", (e) => {
+      if (isScrubbing) handleTimelineUpdate(e);
+    });
+
+    //Timeline
+    timelineContainer.addEventListener("mousemove", handleTimelineUpdate);
+    timelineContainer.addEventListener("mousedown", toggleScrubbing);
+    document.addEventListener("mouseup", (e) => {
+      if (isScrubbing) toggleScrubbing(e);
+    });
+    document.addEventListener("mousemove", (e) => {
+      if (isScrubbing) handleTimelineUpdate(e);
+    });
+
+    let isScrubbing = false;
+    function toggleScrubbing(e) {
+      const rect = timelineContainer.getBoundingClientRect();
+      const percent =
+        Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+      isScrubbing = (e.buttons & 1) === 1;
+      videoWrapper.classList.toggle("scrubbing", isScrubbing);
+      if (isScrubbing) {
+        wasPaused = video.paused;
+        video.pause();
+      } else {
+        video.currentTime = percent * video.duration;
+        if (!wasPaused) video.play();
+      }
+
+      handleTimelineUpdate(e);
+    }
+
+    function handleTimelineUpdate(e) {
+      const rect = timelineContainer.getBoundingClientRect();
+      const percent =
+        Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+      timelineContainer.style.setProperty("--preview-position", percent);
+
+      if (isScrubbing) {
+        e.preventDefault();
+        timelineContainer.style.setProperty("--progress-position", percent);
+      }
+    }
+
+    //duration
+    video.addEventListener("loadeddata", () => {
+      totalTime.textContent = formatDuration(video.duration);
+    });
+
+    video.addEventListener("timeupdate", () => {
+      currentTime.textContent = formatDuration(video.currentTime);
+      const percent = video.currentTime / video.duration;
+      timelineContainer.style.setProperty("--progress-position", percent);
+    });
+
+    const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+      minimumIntegerDigits: 2,
+    });
+    function formatDuration(time) {
+      const seconds = Math.floor(time % 60);
+      const minutes = Math.floor(time / 60) % 60;
+      return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
+    }
+
+    //Fullscreen
+    fullscreenButton.addEventListener("click", toggleFullscreenMode);
+
+    function toggleFullscreenMode() {
+      if (document.fullscreenElement == null) {
+        videoWrapper.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    document.addEventListener("fullscreenchange", () => {
+      videoWrapper.classList.toggle("fullscreen", document.fullscreenElement);
+    });
+
+    //Play/Pause
+    video.addEventListener("play", () => {
+      videoWrapper.classList.remove("paused");
+    });
+    video.addEventListener("pause", () => {
+      videoWrapper.classList.add("paused");
+    });
+  </script>
+</html>
