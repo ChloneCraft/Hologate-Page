@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hologate Spiele</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0; /* add this to remove any default margin */
+        text-align: center;
+      }
+      body {
+        position: relative;
+        background-color: #120f24;
+        height: 100vh;
+        
+      }
+      #background {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(Images/background.jpg); /* Set the image as the background */
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        opacity: 1;
+        z-index: 5;
+      }
+      #wholePageContainer {
+        content: "";
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(18, 15, 36, 0), #120f24);
+        opacity: 1;
+      }
+      .gallery {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0px;
+        row-gap: 50px;
+        padding: 60px;
+        padding-top: 0;
+
+      }
+      .gallery img {
+        width: 220px;
+        height: 220px;
+        border-radius: 10%;
+        display: inline-block;
+      }
+      #header {
+        font-size: 90px;
+        color: snow;
+        font-weight: bold;
+        width: 100%;
+      }
+        #headContainer{
+        padding-top: 8%;
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-bottom: 0%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        flex-direction: column;
+      }
+      div {
+        font-family: 'Montserrat', sans-serif;
+      }
+      #introText {
+        padding-top: 12%;
+        color: white;
+        font-size: 20px;
+        font-weight: 100;
+        letter-spacing: 2px;
+      }
+      #langContainer {
+        position: fixed;
+        margin: 10px;
+        top: 0;
+        right: 0;
+        z-index: 10;
+      }
+      #language {
+        width: 75px;
+        height: 75px;
+        z-index: 3;
+        border-radius: 100%;
+        box-shadow: 3px 3px black;
+        border: 1px solid black;
+      }
+      
+      #languageLink {
+        width: 100%;
+        height: 100%;
+        display: block;
+        z-index: 4;
+      }
+      #languageLink:active{
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="background">
+      <div id="wholePageContainer">
+        <div id="headContainer">
+          <div id="langContainer">
+            <a href="HologatePageEN.html" id="languageLink"><img id="language" src="images/uk.png" alt="english"></a>
+          </div>
+          <div id="header">Virtual Reality Spiele</div>
+          <div id="introText">Unten finden Sie unsere VR-Spielebibliothek. Berühren Sie einfach ein Spiel und Sie erhalten Informationen darüber, worum es geht und was Sie zum Spielen benötigen. </div>
+        </div>
+      </div>
+      <div class="gallery">
+        <a href="Games/Zombyte2GER.html"><img src="images/image1.jpg" alt="Zombyte"></a> 
+        <a href="Games/CookGER.html"><img src="images/image2.jpg" alt="Captain Cook"></a>
+        <a href="Games/GrooveGER.html"><img src="images/image3.jpg" alt="Groove Guardians" ></a>
+        <a href="Games/TowerTagGER.html"><img src="images/image4.jpg" alt="Tower Tag" ></a>
+        <a href="Games/RigRebelsGER.html"><img src="images/image5.jpg" alt="Rig Rebels"></a>
+        <a href="Games/SpaceSlurpiesGER.html"><img src="images/image6.jpg" alt="Space Slurpies" ></a>
+        <!--<a href="Games/DasBootGER.html"><img src="images/image7.jpg" alt="Das Boot" ></a>-->
+        <a href="Games/SimuraiArenaGER.html"><img src="images/image8.jpg" alt="Simurai Arena" ></a>
+        <a href="Games/SamuraiGER.html"><img src="images/image9.jpg" alt="Simurai"></a>
+        <a href="Games/ColdGER.html"><img src="images/image10.jpg" alt="Cold Clash"></a>
+        <a href="Games/SlugterraGER.html"><img src="images/image11.jpg" alt="Slugterra"></a>
+        <a href="Games/BlastersGER.html"><img src="images/image12.jpg" alt="Blasters of the universe"></a>
+        <a href="Games/AngryBirdsGER.html"><img src="images/image13.jpg" alt="Angry Birds 2"></a>
+        <a href="Games/RagnarokGER.html"><img src="images/image14.jpg" alt="Ragnaröck"></a>
+        <a href="Games/GhostBusters.html"><img src="images/image15.jpg" alt="Ghost Busters"></a>
+        <a href="Games/RevolVR.html"><img src="images/image16.jpg" alt="RevolVR 3"></a>
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
